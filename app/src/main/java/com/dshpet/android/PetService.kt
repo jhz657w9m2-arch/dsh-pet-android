@@ -685,6 +685,18 @@ class PetService : Service() {
                 ?.actions?.randomOrNull()
                 ?.let { slug -> pet.playAction(slug) }
         }
+        
+        addRow("🧠 问 DeepSeek") {
+    dismissMenu()
+    try {
+        startActivity(
+            Intent(this@PetService, AiChatActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        )
+    } catch (t: Throwable) {
+        Diag.record(this@PetService, "启动 AiChatActivity 失败", t)
+    }
+}
         addRow("↺ 回到初始位置") {
             dismissMenu()
             pet.resetPosition()
