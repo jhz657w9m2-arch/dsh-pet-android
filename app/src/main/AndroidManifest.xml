@@ -3,14 +3,20 @@
 
     <!-- 悬浮窗：显示在其他应用上层 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <!-- 前台服务常驻，避免宠物被系统回收 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
     <!-- 通知（Android 13+ 需要运行时授权） -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <!-- 开机自启（可选，由用户在设置里开） -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!-- 不需要网络：本 app 完全离线（无 AI、无余额查询） -->
+
+    <!-- 调 DeepSeek API 需要网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- 后台保活：申请「忽略电池优化」，减少省电策略把宠物杀掉 -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
@@ -38,6 +44,13 @@
             android:label="@string/lines_editor_title"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- 新增：AI 对话窗口 -->
+        <activity
+            android:name=".AiChatActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" />
+
         <service
             android:name=".PetService"
             android:exported="false"
@@ -55,5 +68,6 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
+
     </application>
 </manifest>
